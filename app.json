@@ -14,44 +14,24 @@
     },
     "ios": {
       "supportsTablet": true,
-<<<<<<< HEAD
-      "bundleIdentifier": "com.ios.screen.usage.app"
-=======
       "bundleIdentifier": "com.screenusageapp.app"
->>>>>>> development
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-<<<<<<< HEAD
-      "package": "com.screen_usage.app"
-=======
       "package": "com.screenusageapp.app"
->>>>>>> development
     },
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-<<<<<<< HEAD
-    "plugins": [
-      "expo-router"
-    ],
-    "experiments": {
-      "typedRoutes": true
-    },
     "extra": {
-      "router": {
-        "origin": false
-      },
       "eas": {
         "projectId": "8123af08-3ad3-4822-be59-8f9a305f0236"
       }
     }
-=======
->>>>>>> development
   }
 }
