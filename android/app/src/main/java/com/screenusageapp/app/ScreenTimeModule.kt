@@ -23,13 +23,10 @@ class ScreenTimeModule(reactContext: ReactApplicationContext) : ReactContextBase
         val usageStatsList = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, startTime, endTime)
         val usageMap = mutableMapOf<String, Long>()
 
-        val applications = listOf("com.instagram.android", "com.zhiliaoapp.musically", "com.google.android.youtube", "com.reddit.frontpage")
-
         for (usageStats in usageStatsList) {
-            if (applications.contains(usageStats.packageName)) {
-                usageMap[usageStats.packageName] = usageStats.totalTimeInForeground
-            }
+            usageMap[usageStats.packageName] = usageStats.totalTimeInForeground
         }
+
         promise.resolve(usageMap)
     }
 }

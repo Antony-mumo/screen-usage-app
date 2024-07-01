@@ -15,10 +15,9 @@ class ScreenTimeModule: NSObject {
                 return
             }
             
-            let applications = ["com.instagram.instagram", "com.zhiliaoapp.musically", "com.google.ios.youtube", "com.reddit.Reddit"]
             var usageData: [String: TimeInterval] = [:]
             
-            for application in applications {
+            for application in store.allApplications {
                 if let applicationData = store.applicationData(for: application) {
                     let totalUsage = applicationData.totalUsage
                     usageData[application] = totalUsage

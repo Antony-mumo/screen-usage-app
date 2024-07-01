@@ -1,14 +1,17 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { View, Text, Button, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, Button, ActivityIndicator, StyleSheet, Picker } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getUsage } from '../components/usage';
 
 const HomeScreen = () => {
     const [usageData, setUsageData] = useState(null);
+    const [selectedApp, setSelectedApp] = useState(null);
+    const [apps, setApps] = useState([]);
 
     const fetchUsage = useCallback(async () => {
         const usage = await getUsage();
         setUsageData(usage);
+        setApps(Object.keys(usage));
     }, []);
 
     useEffect(() => {
@@ -20,9 +23,19 @@ const HomeScreen = () => {
             <View>
                 <Button title="Refresh Usage Data" onPress={fetchUsage} />
                 {usageData ? (
-                    Object.entries(usageData).map(([app, usage]) => (
-                        <Text key={app}>{`${app}: ${usage} ms`}</Text>
-                    ))
+                    <View>
+                        <Picker
+                            selectedValue={selectedApp}
+                            onValueChange={(itemValue) => setSelectedApp(itemValue)}
+                        >
+                            {apps.map((app) => (
+                                <Picker.Item key={app} label={app} value={app} />
+                            ))}
+                        </Picker>
+                        {selectedApp && (
+                            <Text>{`${selectedApp}: ${usageData[selectedApp]} ms`}</Text>
+                        )}
+                    </View>
                 ) : (
                     <View style={styles.main}>
                         <ActivityIndicator size="small" />

@@ -5,11 +5,10 @@ def getNodeCommandOutput(String command) {
     process.waitFor()
     def output = process.text.trim()
     if (output.isEmpty()) {
-        throw new GradleException("Command failed or returned empty output: $command")
+        throw new Exception("Command failed or returned empty output: $command")
     }
     return output
 }
-
 dependencyResolutionManagement {
   versionCatalogs {
     reactAndroidLibs {
