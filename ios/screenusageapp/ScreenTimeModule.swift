@@ -7,6 +7,7 @@ class ScreenTimeModule: NSObject {
     
     @objc
     func getUsage(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+        print("getUsage called")
         let store = DeviceActivityReport()
         store.load { error in
             guard error == nil else {

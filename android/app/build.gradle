@@ -84,9 +84,9 @@ android {
     compileSdk rootProject.ext.compileSdkVersion
 
 <<<<<<< HEAD
-    namespace 'com.screen_usage.app'
+    namespace 'com.screenusageapp.app'
     defaultConfig {
-        applicationId 'com.screen_usage.app'
+        applicationId 'com.screenusageapp.app'
 =======
     namespace 'com.screenusageapp.app'
     defaultConfig {

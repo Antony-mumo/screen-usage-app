@@ -24,7 +24,7 @@ const HomeScreen = () => {
                         <Text key={app}>{`${app}: ${usage} ms`}</Text>
                     ))
                 ) : (
-                    <View>
+                    <View style={styles.main}>
                         <ActivityIndicator size="small" />
                         <Text style={styles.load}>Loading...</Text>
                     </View>
@@ -37,6 +37,9 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    main: {
+        justifyContent: 'center',
     },
     load: {
         fontSize: 20,

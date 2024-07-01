@@ -1,18 +1,28 @@
 rootProject.name = 'screen-usage-app'
 
+def getNodeCommandOutput(String command) {
+    def process = command.execute(null, rootDir)
+    process.waitFor()
+    def output = process.text.trim()
+    if (output.isEmpty()) {
+        throw new GradleException("Command failed or returned empty output: $command")
+    }
+    return output
+}
+
 dependencyResolutionManagement {
   versionCatalogs {
     reactAndroidLibs {
-      from(files(new File(["node", "--print", "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim(), "../gradle/libs.versions.toml")))
+      from(files(new File(getNodeCommandOutput("node --print \"require.resolve('react-native/package.json')\""), "../gradle/libs.versions.toml")))
     }
   }
 }
 
-apply from: new File(["node", "--print", "require.resolve('expo/package.json')"].execute(null, rootDir).text.trim(), "../scripts/autolinking.gradle");
+apply from: new File(getNodeCommandOutput("node --print \"require.resolve('expo/package.json')\""), "../scripts/autolinking.gradle");
 useExpoModules()
 
-apply from: new File(["node", "--print", "require.resolve('@react-native-community/cli-platform-android/package.json', { paths: [require.resolve('react-native/package.json')] })"].execute(null, rootDir).text.trim(), "../native_modules.gradle");
+apply from: new File(getNodeCommandOutput("node --print \"require.resolve('@react-native-community/cli-platform-android/package.json', { paths: [require.resolve('react-native/package.json')] })\""), "../native_modules.gradle");
 applyNativeModulesSettingsGradle(settings)
 
 include ':app'
-includeBuild(new File(["node", "--print", "require.resolve('@react-native/gradle-plugin/package.json', { paths: [require.resolve('react-native/package.json')] })"].execute(null, rootDir).text.trim()).getParentFile())
+includeBuild(new File(getNodeCommandOutput("node --print \"require.resolve('@react-native/gradle-plugin/package.json', { paths: [require.resolve('react-native/package.json')] })\"")).getParentFile())
